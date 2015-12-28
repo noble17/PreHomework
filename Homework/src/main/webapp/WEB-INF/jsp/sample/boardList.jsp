@@ -11,7 +11,7 @@
 <table style="border:1px solid #ccc">
     <colgroup>
         <col width="30%"/>
-        <col width="*"/>
+        <col width="*"   />
         <col width="15%"   />
         <col width="20%"   />
     </colgroup>
