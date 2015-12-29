@@ -7,12 +7,27 @@
         <![CDATA[
             SELECT
                 email,
-                title,
                 passwd,
                 currentTime
             FROM
                 boardtable
         ]]>
     </select>
-     
+    
+    <insert id="insertBoard" parameterType="hashmap">
+    <![CDATA[
+        INSERT INTO boardtable
+        (
+            email,
+            passwd,
+            contents
+        )
+        VALUES
+        (
+            #{EMAIL}, 
+            #{PW},
+            #{CONTENTS}
+        )
+    ]]>
+</insert> 
 </mapper>
