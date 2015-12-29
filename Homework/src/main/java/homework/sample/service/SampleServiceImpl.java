@@ -25,5 +25,24 @@ public class SampleServiceImpl implements SampleService{
     public void insertBoard(Map<String, Object> map) throws Exception {
         sampleDAO.insertBoard(map);
     }
+	@Override
+	public void editPasswd(Map<String, Object> map) throws Exception {
+		sampleDAO.selectBoardList(map);
+		
+	}
+	@Override
+	public Map<String, Object> selectCheckPasswd(Map<String, Object> map) throws Exception {
+		
+		return sampleDAO.selectcheckPasswd(map);
+	}
+	@Override
+	public void updateTable(Map<String, Object> map) throws Exception {
+		sampleDAO.updateTable(map);
+	}
+	@Override
+	public void deleteTable(Map<String, Object> map) {
+		sampleDAO.deleteTable(map);
+		
+	}
  
 }

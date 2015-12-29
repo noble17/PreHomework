@@ -67,7 +67,7 @@
 	background-color : #B2CCFF;
 	width : 99%;
 	height : 625px;
-	text-align : center; 
+	text-align : right; 
 	border-bottom-left-radius : 100px;
 	border-bottom-right-radius : 100px;
 	border-left : 5px solid gray;
@@ -99,7 +99,6 @@ table, th, td {
 	cursor : pointer;
 }
 
-
 </style>
 <script type ="text/javascript">
 function onMouseOut(obj) {
@@ -109,78 +108,29 @@ function onMouseOut(obj) {
 function onMouseOver(obj) {
 	obj.style.color = "red";
 }
-
 $(function(){
-	   $('#btn').click(function() {
-		   $('#fm').attr('action','insertBoard.do').submit();
+	   $('#btn_mod').click(function() {	
+		   $('#fm').attr('action','updateTable.do').submit();
 	   });
 	});
 
-$(function(){
-	   $("input[value='수정']").click(function() {
-		   var name = "edit"+this.id;
-		   $("form[name="+name+"]").attr('action','editPasswd.do').submit();
-	   });
-	});
-
-$(function(){
-	   $("input[value='삭제']").click(function() {
-		   var name = "edit"+this.id;
-		   $("form[name="+name+"]").attr('action','deleteTable.do').submit();
-	   });
-	});
 </script>
 <body>
 	<div id="main_header">
-		<h1>방   명   록</h1>
+		<h1>수 정 하 기</h1>
 	</div>
 	<div id="main_body">
 		<form id ="fm" name = "fm"  method="POST"><br>
-			<b id="emailtext">이메일　: </b><input type="email"  id ="EMAIL"name="EMAIL" autofocus required placeholder="이메일"/>
+			<b id="emailtext">이메일　: </b><input type="email"  disabled value = "${row.email}" autofocus required placeholder="이메일"/>
 			<b id="pwtext">비밀번호　: </b><input type="password" name="PW" required placeholder="패스워드" ><br><br>
-			<textarea placeholder = "내용을 입력해주세요" rows= "7" cols = "50" id="CONTENTS" name="CONTENTS"> </textarea><br>
-			<input type="button" id = "btn" class="button" value="방명록등록"  onmouseover='onMouseOver(this)' onmouseout='onMouseOut(this)'>
+			<input type="hidden" name = "EMAIL" value="${row.email}">
+			<textarea placeholder = "" rows= "7" cols = "50"id="CONTENTS" name="CONTENTS">${row.contents}</textarea><br>
+			<input type="button" id = "btn_mod" class="button" value="수정완료"  onmouseover='onMouseOver(this)' onmouseout='onMouseOut(this)'>
+			<input type ="hidden" name = "ID" value="${row.ID}" />	
 		</form>	
 	</div>
 	<div id = "main_footer">
+	</div>
 	<br>
-		<table  style="width:100%; word-break:break-all;">
-         <thead>
-            <tr>
-               <th style= "width:15%">이메일</th>
-               <th style= "width:45%">본문</th>
-               <th style= "width:13%">글 등록시간</th>
-               <th style= "width:13%">글 수정시간</th>
-               <th >수 정</th>
-               <th >삭 제</th>
-            </tr>
-         </thead>
-         <tbody>
-            <c:choose>
-            <c:when test="${fn:length(list) > 0}">
-               <c:forEach items="${list}" var="row">
-               <form name="edit${row.ID}">
-                  <input type="hidden" name ="ID" value="${row.ID}" >
-                  <tr>
-                  	<td>${row.email}</td>
-                     <td>${row.contents}</td>
-                     <td>${row.currentTime}</td>
-                     <td>${row.modifyTime}</td>
-                     <td><input type="button"  id="${row.ID}" value="수정" class="button" onmouseover='onMouseOver(this)' onmouseout='onMouseOut(this)'/></td>
-                     <td><input type="button" id="${row.ID}" value="삭제" class="button" onmouseover='onMouseOver(this)' onmouseout='onMouseOut(this)'/></td>
-                  </tr>
-               </form>
-               </c:forEach>
-            </c:when>
-            <c:otherwise>
-               <tr>
-                  <td colspan="6">조회된 결과가 없습니다.</td>
-               </tr>
-            </c:otherwise>
-         </c:choose> 
-         </tbody>
-      </table>
-    </div>
-	
 </body>
 </html>
