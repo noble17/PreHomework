@@ -98,6 +98,25 @@ table, th, td {
 	width : 100px;
 	cursor : pointer;
 }
+#messagestyle{
+	font-family : 맑은 고딕;
+	font-weight : bold;
+	border : 2px solid black;
+	border-radius : 20px;
+	height : 50px;
+	width : 250px;
+	text-align : center; 
+	display:table-cell;
+	vertical-align:middle;
+	padding-top: 30px;
+	margin: 0px auto;
+	position: absolute;
+	top: 30%;
+	left: 40%;
+	color:yellow;
+	background: black;
+	opacity:0.7;
+}
 
 
 </style>
@@ -112,12 +131,18 @@ function onMouseOver(obj) {
 
 $(function(){
 	   $('#btn').click(function() {
+
 		   $('#fm').attr('action','insertBoard.do').submit();
 	   });
 	});
-
+$(function(){
+	   $('#messagestyle').click(function() {
+		   $('#messagestyle').hide();
+	   });
+	});
 $(function(){
 	   $("input[value='수정']").click(function() {
+	       
 		   var name = "edit"+this.id;
 		   $("form[name="+name+"]").attr('action','editPasswd.do').submit();
 	   });
@@ -135,14 +160,19 @@ $(function(){
 		<h1>방   명   록</h1>
 	</div>
 	<div id="main_body">
+	<div>
+	${message}
+	
+	</div>
 		<form id ="fm" name = "fm"  method="POST"><br>
 			<b id="emailtext">이메일　: </b><input type="email"  id ="EMAIL"name="EMAIL" autofocus required placeholder="이메일"/>
-			<b id="pwtext">비밀번호　: </b><input type="password" name="PW" required placeholder="패스워드" ><br><br>
+			<b id="pwtext">비밀번호　: </b><input type="password" id = "PW" name="PW" required placeholder="패스워드" ><br><br>
 			<textarea placeholder = "내용을 입력해주세요" rows= "7" cols = "50" id="CONTENTS" name="CONTENTS"> </textarea><br>
 			<input type="button" id = "btn" class="button" value="방명록등록"  onmouseover='onMouseOver(this)' onmouseout='onMouseOut(this)'>
 		</form>	
 	</div>
 	<div id = "main_footer">
+	
 	<br>
 		<table  style="width:100%; word-break:break-all;">
          <thead>
@@ -155,6 +185,7 @@ $(function(){
                <th >삭 제</th>
             </tr>
          </thead>
+         
          <tbody>
             <c:choose>
             <c:when test="${fn:length(list) > 0}">

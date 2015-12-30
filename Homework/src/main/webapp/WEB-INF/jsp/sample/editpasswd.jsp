@@ -66,6 +66,25 @@ table, th, td {
 	width : 100px;
 	cursor : pointer;	
 }
+#messagestyle{
+	font-family : 맑은 고딕;
+	font-weight : bold;
+	border : 2px solid black;
+	border-radius : 20px;
+	height : 50px;
+	width : 250px;
+	text-align : center; 
+	display:table-cell;
+	vertical-align:middle;
+	padding-top: 30px;
+	margin: 0px auto;
+	position: absolute;
+	top: 30%;
+	left: 40%;
+	color:yellow;
+	background: black;
+	opacity:0.7;
+}
 
 </style>
 <script type="text/javascript">
@@ -79,13 +98,18 @@ $(function(){
 		   $('#editdialog').attr('action','openBoardList.do').submit();
 	   });
 	});
-
+$(function(){
+	   $('#messagestyle').click(function() {
+		   $('#messagestyle').hide();
+	   });
+	});
 </script>
 <body>
 	<div id="main_header">
 		<h1>비 밀 번 호 입 력</h1>
 	</div>
 	<div id="main_body">
+		<div>${message_fail}</div>
 		 <div id = "form_dialog">
     		 <form id = "editdialog">
      			<div id= "styles">

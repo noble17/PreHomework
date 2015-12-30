@@ -98,7 +98,25 @@ table, th, td {
 	width : 100px;
 	cursor : pointer;
 }
-
+#messagestyle{
+	font-family : 맑은 고딕;
+	font-weight : bold;
+	border : 2px solid black;
+	border-radius : 20px;
+	height : 50px;
+	width : 250px;
+	text-align : center; 
+	display:table-cell;
+	vertical-align:middle;
+	padding-top: 30px;
+	margin: 0px auto;
+	position: absolute;
+	top: 30%;
+	left: 40%;
+	color:yellow;
+	background: black;
+	opacity:0.7;
+}
 </style>
 <script type ="text/javascript">
 function onMouseOut(obj) {
@@ -113,13 +131,20 @@ $(function(){
 		   $('#fm').attr('action','updateTable.do').submit();
 	   });
 	});
-
+$(function(){
+	   $('#messagestyle').click(function() {
+		   $('#messagestyle').hide();
+	   });
+	});
 </script>
 <body>
 	<div id="main_header">
 		<h1>수 정 하 기</h1>
 	</div>
 	<div id="main_body">
+		<div>
+			${message}
+		</div>
 		<form id ="fm" name = "fm"  method="POST"><br>
 			<b id="emailtext">이메일　: </b><input type="email"  disabled value = "${row.email}" autofocus required placeholder="이메일"/>
 			<b id="pwtext">비밀번호　: </b><input type="password" name="PW" required placeholder="패스워드" ><br><br>
