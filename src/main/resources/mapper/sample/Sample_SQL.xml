@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="sample">
+    <select id="selectBoardList" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+            SELECT
+            	ID,
+                email,
+                contents,
+                passwd,
+                currentTime,
+                modifyTime
+            FROM
+                boardtable
+            ORDER BY modifyTime DESC
+        ]]>
+    </select>
+    <insert id="insertBoard" parameterType="hashmap">
+    <![CDATA[
+        INSERT INTO boardtable
+        (
+            email,
+            passwd,
+            contents
+        )
+        VALUES
+        (
+            #{EMAIL}, 
+            #{PW},
+            #{CONTENTS}
+        )
+    ]]>
+	</insert>
+	<select id="selectcheckPasswd" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+            SELECT
+            	ID,
+                email,
+                contents,
+                passwd
+            FROM
+                boardtable
+            WHERE
+            	ID = #{ID}
+        ]]>
+    </select> 
+    <update id="updateTable" parameterType="hashmap">
+    	<![CDATA[
+        UPDATE boardtable
+        SET 
+        	email=#{EMAIL}, passwd=#{PW}, contents=#{CONTENTS}, modifyTime = CURRENT_TIMESTAMP
+        WHERE
+        	ID = #{ID}
+    ]]>
+    </update>
+    <delete id="deleteTable" parameterType="hashmap">
+    	<![CDATA[
+        DELETE FROM boardtable
+       	WHERE ID = #{ID}
+    ]]>
+    </delete>
+</mapper>
