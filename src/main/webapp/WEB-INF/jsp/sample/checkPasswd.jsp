@@ -147,7 +147,7 @@ $(function(){
 		</div>
 		<form id ="fm" name = "fm"  method="POST"><br>
 			<b id="emailtext">이메일　: </b><input type="email"  disabled value = "${row.email}" autofocus required placeholder="이메일"/>
-			<b id="pwtext">비밀번호　: </b><input type="password" name="PW" required placeholder="패스워드" ><br><br>
+			<b id="pwtext">비밀번호　: </b><input type="password" value = "${row.passwd}"name="PW" required placeholder="패스워드" ><br><br>
 			<input type="hidden" name = "EMAIL" value="${row.email}">
 			<textarea placeholder = "" rows= "7" cols = "50"id="CONTENTS" name="CONTENTS">${row.contents}</textarea><br>
 			<input type="button" id = "btn_mod" class="button" value="수정완료"  onmouseover='onMouseOver(this)' onmouseout='onMouseOut(this)'>

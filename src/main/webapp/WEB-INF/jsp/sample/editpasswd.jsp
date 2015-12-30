@@ -109,6 +109,7 @@ $(function(){
 		<h1>비 밀 번 호 입 력</h1>
 	</div>
 	<div id="main_body">
+	<div>${message}</div>
 		<div>${message_fail}</div>
 		 <div id = "form_dialog">
     		 <form id = "editdialog">

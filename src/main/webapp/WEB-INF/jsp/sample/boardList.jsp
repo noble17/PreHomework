@@ -168,7 +168,7 @@ $(function(){
 			<b id="emailtext">이메일　: </b><input type="email"  id ="EMAIL"name="EMAIL" autofocus required placeholder="이메일"/>
 			<b id="pwtext">비밀번호　: </b><input type="password" id = "PW" name="PW" required placeholder="패스워드" ><br><br>
 			<textarea placeholder = "내용을 입력해주세요" rows= "7" cols = "50" id="CONTENTS" name="CONTENTS"> </textarea><br>
-			<input type="button" id = "btn" class="button" value="방명록등록"  onmouseover='onMouseOver(this)' onmouseout='onMouseOut(this)'>
+			<input type="submit" id = "btn" class="button" value="방명록등록"  onmouseover='onMouseOver(this)' onmouseout='onMouseOut(this)'>
 		</form>	
 	</div>
 	<div id = "main_footer">

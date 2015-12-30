@@ -1,8 +1,14 @@
 package homework.sample.controller;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.JOptionPane;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -13,8 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 //import homework.common.common.CommandMap;
 import homework.sample.service.SampleService;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 @Controller
 public class SampleController {
     @Resource(name="sampleService")
@@ -46,6 +50,13 @@ public class SampleController {
     	else if(validate(commandMap.get("EMAIL").toString()))
         {	
             sampleService.insertBoard(commandMap);
+            DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            ZonedDateTime zonedDateTime = ZonedDateTime.now();
+            ZoneId zone = ZoneId.systemDefault();
+            String wherezone = zone.getId();
+            String formatter1 = dateTimeFormatter1.format(zonedDateTime);
+            IAddable<String> stringAdder = (String s1	, String s2) -> s1 +"  "+s2;
+            redirectAttributes.addFlashAttribute("message", "<div id = 'messagestyle'>"+ stringAdder.add(wherezone, formatter1) + "방명록에 등록되었습니다.</div>");
         }
     	
 		else  
@@ -63,9 +74,21 @@ public class SampleController {
     @RequestMapping(value="/sample/updateTable.do")
     public ModelAndView updateTable(@RequestParam Map<String,Object> commandMap, RedirectAttributes redirectAttributes) throws Exception{
         ModelAndView mv = new ModelAndView("redirect:/sample/openBoardList.do");
-        sampleService.updateTable(commandMap);
-        redirectAttributes.addFlashAttribute("message", "<div id = 'messagestyle'>방명록이 수정되었습니다.</div>");
-        return mv;
+        if(commandMap.get("PW").equals(""))
+		{
+
+        	ModelAndView mv2 = new ModelAndView("redirect:/sample/openBoardList.do");
+ 
+    		redirectAttributes.addFlashAttribute("message", "<div id = 'messagestyle'>비밀번호를 입력하지 않았습니다.<br>다시 접속하시기 바랍니다.</div>");
+
+    		return mv2;
+		}
+        else{
+        	sampleService.updateTable(commandMap);
+        	redirectAttributes.addFlashAttribute("message", "<div id = 'messagestyle'>방명록이 수정되었습니다.</div>");
+        	return mv;
+        }
+        
     }
     @RequestMapping(value="/sample/deleteTable.do")
     public ModelAndView deleteTable(@RequestParam Map<String,Object> commandMap) throws Exception{
@@ -79,7 +102,7 @@ public class SampleController {
         ModelAndView mv_fail = new ModelAndView("/sample/editpasswd");
         Map<String,Object> list = sampleService.selectCheckPasswd(commandMap);
         mv_success.addObject("row", list);
-        String temp_success = "<div id = 'messagestyle'>비밀번호가 맞습니다. 수정이가능합니다.</div>";
+        String temp_success = "<div id = 'messagestyle'>비밀번호가 맞습니다.<br>수정이가능합니다.</div>";
         String temp_fail = "<div id = 'messagestyle'>비밀번호가 틀렸습니다.</div>";
         if(commandMap.get("passwd").equals(list.get("passwd")))
         {
