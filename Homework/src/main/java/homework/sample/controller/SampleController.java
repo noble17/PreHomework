@@ -89,6 +89,7 @@ public class SampleController {
         else
         {
         	mv_fail.addObject("message_fail", temp_fail);
+        	mv_fail.addObject("row", list);
         	return mv_fail;
         }
         
